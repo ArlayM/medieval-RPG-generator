@@ -1,5 +1,5 @@
 //Coucou Diane ! ♥
-var name = "Lorem" ;
+var characterName = "Lorem" ;
 
 var funFacts = [] ;
 
@@ -15,24 +15,143 @@ var luck = -1 ;
 
 var intelligence = -1 ;
 
-var male = 0;
+var gender = "enby";
 
-const nomMasc = ["Pierre", "Marceau", "Yvan", "Léopold", "Carmin"];
+const MALE_NAME = ["Pierre", "Marceau", "Yvan", "Léopold", "Carmin"];
 
-const nomFem = ["Alice", "Marie", "Yélinda", "Thérèse", "Lucie"];
+const FEMALE_NAME = ["Alice", "Marie", "Yélinda", "Thérèse", "Lucie"];
 
-const gender = ["Male", "Female"];
+const GENDERS = ["Male", "Female"];
+
+const HAIR_COLORS = ["red", "dark", "blond"];
+
+const EYES_COLORS = ["blue", "green", "brown"];
+
+const MALE_LAYERS= [
+	[//Back Hair 0
+		[4, "/HairBack/"]
+	],
+	[//Eyes 1
+		[4, "/Eyes/"]
+	],
+	[//Face 2
+		[10, "/Face/face"]
+	], 
+	[//Clothes 3
+		[3, "/Clothes/farmer"],
+		[3, "/Clothes/homeless"],
+		[3, "/Clothes/nobleclothes"],
+	],  
+	[//Front Hair 4
+		[12, "/HairFront/"]
+	],
+	[//Accessory 5
+	]
+];
+
+const FEMALE_LAYERS= [
+	[//Back Hair 0
+		[4, "/HairBack/"]
+	],
+	[//Eyes 1
+		[4, "/Eyes/"]
+	],
+	[//Face 2
+		[10, "/Face/face"]
+	], 
+	[//Clothes 3
+		[3, "/Clothes/farmer"],
+		[3, "/Clothes/homeless"],
+		[3, "/Clothes/nobleclothes"],
+	],  
+	[//Front Hair 4
+		[12, "/HairFront/"]
+	],
+	[//Accessory 5
+	]
+];
+
+const SKINS_LAYERS = [
+	"images/skin1.png",
+	"images/skin2.png",
+	"images/skin3.png",
+	"images/skin4.png"
+];
+
+/*
+const HAT_PATH = new Map();
+HAT_PATH.set("farmer1", "path");
+HAT_PATH.set("noble1", "path");*/
+
+/**
+ * Fonction qui créer un personnage aléatoirement
+ * @param layers : Tableau qui contient les layers de base d'un genre
+ * @returns : un tableau qui contient les chemin relatif aux images dans l'ordre de superposition de l'arrière vers l'avant
+ */
+function getRandomCharacterFromLayer(layers, gender){
+	var paths = [];
+	var hairColor = getRandomElement(HAIR_COLORS);
+	var eyesColor = getRandomElement(EYES_COLORS);
 
 
+	layers.forEach((layer, index, array) => {
+		var newPath = "images";
+
+		if(gender == "Male"){
+			newPath += "/Homme";
+		} else {
+			newPath += "/Femme";
+		}
+		var randomRow = getRandomElement(layer);
+
+		switch (index) {
+			case 0:
+				newPath += randomRow[1] + hairColor + "Back" + getRandomIntInRange(1, randomRow[0]) + ".png";
+				paths.push(newPath);
+				break;
+			case 4:
+				newPath += randomRow[1] + hairColor + "hair" + getRandomIntInRange(1, randomRow[0]) + ".png";
+				paths.push(newPath);
+				break;
+			case 5:
+				/* accessoire
+				if(paths[4].includes("farmer1.png") && getRandomInt(2) == 1){
+					//console.log("add");
+					paths.push(HAT_PATH.get("farmer1"));
+				} else if (paths[4].includes("noble1.png") && getRandomInt(2) == 1){
+					//console.log("add");
+					paths.push(HAT_PATH.get("noble1"));
+				} else {
+					var indexRandomAccessory = getRandomIntInRange(0, randomRow.length);
+					if ( indexRandomAccessory != randomRow.length ){
+						newPath += randomRow[indexRandomAccessory] + ".png";
+					}
+				}*/
+				break;
+			case 1:
+				paths.push(getRandomElement(SKINS_LAYERS));
+				newPath += randomRow[1] + eyesColor + "eyes" + getRandomIntInRange(1, randomRow[0]) + ".png";
+				paths.push(newPath);
+				break;
+			default:
+				newPath += randomRow[1] + getRandomIntInRange(1, randomRow[0]) + ".png";
+				paths.push(newPath);
+				break;
+		}
+	});
+	return paths;
+}
+
+console.log(getRandomCharacterFromLayer(MALE_LAYERS, "Male"));
 // Déclare une variable "verbes" intialise un tableau [] dont les éléments sont des strings.
 //
-const verbes = [
+const VERBES = [
 	"Aime manger", "Mange", "Tricotte", "Range", "Fouette", "Echange", "Dors sur", "Hurle sur", "Fait des calins à", "Ressemble à", "Vends",
 	"Chante avec", "Discute avec", "Lance", "Ecoute", "Juge", "Aide", "Mesure", "Surveille", "Saute sur", "Drague", "A passer une nuit avec", "S'est réveiller avec",
 	"Bois avec", "Peint", "Sculpte", "Rêve", "Nage avec", "Cours après", "Souffle sur"
 ];
 
-const nom = [
+const NOMS = [
 
 	"un chien", "un chat", "un étalon", "des oeufs", "sa soeur", "son frère", "son amant(e)", "une gougandine", "un gourgandin", "des brocolis",
 	"des haricots", "une écharpe", "une étable", "une pierre", "une pomme", "une casserole", "une armoire", "une plume", "un sac de blé",
@@ -40,14 +159,14 @@ const nom = [
 	"un fantôme", "un lion", "une purée"
 ];
 
-const adjectif = [
+const ADJECTIFS = [
 	"mou/molle", "dégoutant(e)", "vigoureux/se", "étrange", "barvard(e)", "effrayant(e)", "paresseux(se)",
 	"avec rage", "avec joie", "ironiquement", "passionément", "méchament", "en en mettant partout",
 	"glissant(e)", "dont l'odeur est bizarre", "dont le calme est impressionant", "dont la rage est au sumum", "bruyant(e)",
 	"gluant(e)", "sec/sèche", "volant(e)", "vandale", "hors la loi", "pervers(e)", "idiot(e)", "énervant(e)",
 ];
 
-const autre = [
+const AUTRES = [
 	"dans la grange", "dans un lac", "dans une prairie",
 	"dans son grenier", "en plein centre ville", "au bar", "à l'auberge", "dans un bordel", "chez sa mère", "chez son père", "dans des ruines", "sur la route",
 	"sur une balle de foin", "dans une carrière", "dans une grotte", "sur une flaque de boue", "chez le boulanger", "en prison", "sur un échafaudage", "sur un pont",
@@ -74,7 +193,9 @@ function getRandomElement(tab) {
 
 
 function createSheet() {
-	name = getRandomName();
+	gender = getRandomElement(GENDERS);
+
+	characterName = getRandomName(gender);
 
 	strengh = getRandomIntInRange(1,12);
 	agility = getRandomIntInRange(1,12);
@@ -87,7 +208,7 @@ function createSheet() {
 	funFacts.push(createFunFact());
 	funFacts.push(createFunFact());
 
-	updateElement("Name",name); 
+	updateElement("Name", characterName); 
 
 	updateElement("Fact1",funFacts[0]); 
 	updateElement("Fact2",funFacts[1]); 
@@ -102,7 +223,6 @@ function updateElement(id, text) {
 	var element = document.getElementById(id);
 	element.innerHTML = text;
 }
-
 
 function addElement(text) {
 	// crée un nouvel élément p
@@ -127,44 +247,30 @@ function addH1(grosTitre) {
 	
 }
 
-
-
 function createFunFact() {
-	var verbeAleatoire = getRandomElement(verbes);
-	var nomAleatoire = getRandomElement(nom);
-	var adjectifAleatoire = getRandomElement(adjectif);
-	var autreAleatoire = getRandomElement(autre);
+	var verbeAleatoire = getRandomElement(VERBES);
+	var nomAleatoire = getRandomElement(NOMS);
+	var adjectifAleatoire = getRandomElement(ADJECTIFS);
+	var autreAleatoire = getRandomElement(AUTRES);
 
 	return verbeAleatoire + " " + nomAleatoire + " " + adjectifAleatoire + " " + autreAleatoire + ".";
 
 }
 
- 
-
-
-function getRandomName() {
-	var randomGender = getRandomElement(gender);
+function getRandomName(randomGender) {
 	if (randomGender == "Male") {
-		return getRandomElement(nomMasc);
+		return getRandomElement(MALE_NAME);
 	} else {
-		return getRandomElement(nomFem);
+		return getRandomElement(FEMALE_NAME);
 		
 	}
 
 }
-console.log(getRandomName());
-
-
 
 function getRandomIntInRange(min, max) {
 	return getRandomInt(max - min + 1) + min;
  
 }
-console.log (getRandomIntInRange(1,12));
-
-
-
-
 
 // function getRandomElement(gender)
 

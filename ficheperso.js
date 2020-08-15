@@ -230,18 +230,6 @@ function createSheet() {
 	
 	var canvas = document.getElementById('photo');
 	var ctx = canvas.getContext('2d');
-	/*console.log(pathImages);
-	Promise
-		.all(pathImages.map(i => loadImage(i)))
-		.then((images) => {
-			images.forEach((image) => {
-				ctx.drawImage(image, 0, 0);
-			});
-		}).catch((err) => {
-			console.error(err);
-		});*/
-
-
 
 	var areReady = [];
 	for(let path of pathImages){
@@ -252,7 +240,7 @@ function createSheet() {
 	
 	pathImages.forEach(function (path, index, array){
 		let image = new Image();
-		image.addEventListener("load", () => {
+		image.addEventListener("load", function () {
 			areReady[index] = true;
 			let allReady = true;
 			for(let check of areReady){

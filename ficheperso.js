@@ -40,7 +40,7 @@ const MALE_LAYERS= [
 	[//Clothes 3
 		[3, "/Clothes/farmer"],
 		[3, "/Clothes/homeless"],
-		[3, "/Clothes/nobleclothes"],
+		[3, "/Clothes/noble"],
 	],  
 	[//Front Hair 4
 		[12, "/HairFront/"]
@@ -51,7 +51,7 @@ const MALE_LAYERS= [
 
 const FEMALE_LAYERS= [
 	[//Back Hair 0
-		[4, "/HairBack/"]
+		[13, "/HairBack/"]
 	],
 	[//Eyes 1
 		[4, "/Eyes/"]
@@ -62,10 +62,10 @@ const FEMALE_LAYERS= [
 	[//Clothes 3
 		[3, "/Clothes/farmer"],
 		[3, "/Clothes/homeless"],
-		[3, "/Clothes/nobleclothes"],
+		[3, "/Clothes/noble"],
 	],  
 	[//Front Hair 4
-		[12, "/HairFront/"]
+		[9, "/HairFront/"]
 	],
 	[//Accessory 5
 	]
@@ -85,10 +85,10 @@ HAT_PATH.set("noble1", "path");*/
 
 /**
  * Fonction qui créer un personnage aléatoirement
- * @param layers : Tableau qui contient les layers de base d'un genre
+ * @param layers : Tableau qui contient les layers de base d'un genre 
  * @returns : un tableau qui contient les chemin relatif aux images dans l'ordre de superposition de l'arrière vers l'avant
  */
-function getRandomCharacterFromLayer(layers, gender){
+function getRandomCharacterFromLayer(layers){
 	var paths = [];
 	var hairColor = getRandomElement(HAIR_COLORS);
 	var eyesColor = getRandomElement(EYES_COLORS);
@@ -142,7 +142,6 @@ function getRandomCharacterFromLayer(layers, gender){
 	return paths;
 }
 
-console.log(getRandomCharacterFromLayer(MALE_LAYERS, "Male"));
 // Déclare une variable "verbes" intialise un tableau [] dont les éléments sont des strings.
 //
 const VERBES = [
@@ -192,7 +191,10 @@ function getRandomElement(tab) {
 }
 
 
+
 function createSheet() {
+
+	
 	gender = getRandomElement(GENDERS);
 
 	characterName = getRandomName(gender);
@@ -216,7 +218,30 @@ function createSheet() {
 	updateElement("stat1","Force: "+ strengh); 
 	updateElement("stat2","Agilité: "+ agility); 
 
+	var pathImages  ;
+	if(gender == "Male")
+	{ 
+		pathImages = getRandomCharacterFromLayer(MALE_LAYERS);
+	}
+	else
+	{ 
+		pathImages = getRandomCharacterFromLayer(FEMALE_LAYERS);
+	}
 	
+	var canvas = document.getElementById('photo');
+	var ctx = canvas.getContext('2d');
+
+	 // Définit le chemin vers sa source
+
+	for (let path of pathImages) {
+		var img = new Image();   // Crée un nouvel élément Image
+		img.addEventListener('load', function() {
+			ctx.drawImage(img, 0, 0);
+		  }, false);
+		img.src = path;
+	  } 
+
+	  //tableau vide auquel on push une nouvelle image puis boucler ce nouveau tableau pour drawn les images 
 }
 
 function updateElement(id, text) {

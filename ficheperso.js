@@ -1,3 +1,4 @@
+//Coucou Diane ! ♥
 var name = "Lorem" ;
 
 var funFacts = [] ;

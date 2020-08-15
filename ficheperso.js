@@ -230,19 +230,47 @@ function createSheet() {
 	
 	var canvas = document.getElementById('photo');
 	var ctx = canvas.getContext('2d');
+	/*console.log(pathImages);
+	Promise
+		.all(pathImages.map(i => loadImage(i)))
+		.then((images) => {
+			images.forEach((image) => {
+				ctx.drawImage(image, 0, 0);
+			});
+		}).catch((err) => {
+			console.error(err);
+		});*/
 
-	 // Définit le chemin vers sa source
 
-	for (let path of pathImages) {
-		var img = new Image();   // Crée un nouvel élément Image
-		img.addEventListener('load', function() {
-			ctx.drawImage(img, 0, 0);
-		  }, false);
-		img.src = path;
-	  } 
 
-	  //tableau vide auquel on push une nouvelle image puis boucler ce nouveau tableau pour drawn les images 
+	var areReady = [];
+	for(let path of pathImages){
+		areReady.push(false);
+	}
+
+	var images = [];
+	
+	pathImages.forEach(function (path, index, array){
+		let image = new Image();
+		image.addEventListener("load", () => {
+			areReady[index] = true;
+			let allReady = true;
+			for(let check of areReady){
+				allReady = allReady && check;
+			}
+			if(allReady){
+				for(let img of images){
+					ctx.drawImage(img, 0, 0);
+				}
+			}
+		});
+		image.src = path;
+		images.push(image);
+		
+	});
+
 }
+
 
 function updateElement(id, text) {
 	var element = document.getElementById(id);

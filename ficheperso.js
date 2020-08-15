@@ -31,12 +31,12 @@ const MALE_LAYERS= [
 	[//Back Hair 0
 		[4, "/HairBack/"]
 	],
-	[//Eyes 1
+	[//Face 1
+		[10, "/Face/face"]
+	],
+	[//Eyes 2
 		[4, "/Eyes/"]
 	],
-	[//Face 2
-		[10, "/Face/face"]
-	], 
 	[//Clothes 3
 		[3, "/Clothes/farmer"],
 		[3, "/Clothes/homeless"],
@@ -53,12 +53,13 @@ const FEMALE_LAYERS= [
 	[//Back Hair 0
 		[13, "/HairBack/"]
 	],
-	[//Eyes 1
+	[//Face 1
+		[10, "/Face/face"]
+	],
+	[//Eyes 2
 		[4, "/Eyes/"]
 	],
-	[//Face 2
-		[10, "/Face/face"]
-	], 
+ 
 	[//Clothes 3
 		[3, "/Clothes/farmer"],
 		[3, "/Clothes/homeless"],
@@ -93,7 +94,7 @@ function getRandomCharacterFromLayer(layers){
 	var hairColor = getRandomElement(HAIR_COLORS);
 	var eyesColor = getRandomElement(EYES_COLORS);
 
-
+	paths.push("images/background.png");
 	layers.forEach((layer, index, array) => {
 		var newPath = "images";
 
@@ -128,18 +129,21 @@ function getRandomCharacterFromLayer(layers){
 					}
 				}*/
 				break;
-			case 1:
-				paths.push(getRandomElement(SKINS_LAYERS));
+			case 2:
 				newPath += randomRow[1] + eyesColor + "eyes" + getRandomIntInRange(1, randomRow[0]) + ".png";
 				paths.push(newPath);
 				break;
+			case 1:
+				paths.push(getRandomElement(SKINS_LAYERS));
 			default:
 				newPath += randomRow[1] + getRandomIntInRange(1, randomRow[0]) + ".png";
 				paths.push(newPath);
 				break;
 		}
 	});
+	paths.push("images/cadre.png");
 	return paths;
+	
 }
 
 // Déclare une variable "verbes" intialise un tableau [] dont les éléments sont des strings.

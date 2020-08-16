@@ -6,35 +6,119 @@
   <title>Inscrire un titre ici</title>
   <!-- HTML5 -->
   <script src="ficheperso.js"></script>
+  <style>
+    body {
+      background-image: url('https://i.imgur.com/0Gr4Nc4.png');
+      background-repeat: repeat-y;
+    }
+
+    .mainDiv {
+      width: 99%;
+      margin: auto;
+      border: 5px solid #b4a185;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .picture {
+      font-size: 16px;
+      text-align: center;
+      opacity: 1;
+      border: 4px solid #806948;
+      float: center;
+      padding: 5px;
+      margin: 30px;
+      border-style: dashed double;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .informations {
+      margin: 30px;
+      display: flex;
+      flex-direction: column;
+      flex: 2;
+    }
+
+    .name {
+      border: 5px solid #806948;
+      float: center;
+      margin: 30px;
+      margin-bottom: 10px;
+      margin-top: 0px;
+      padding: 5px;
+      color: #f4e9ca;
+      font-size: 30px;
+    }
+
+    .details {
+      font-size: 16px;
+      color: #c7b193;
+      font-family: 'book antiqua';
+      text-align: center;
+      opacity: 1;
+      border: 4px solid #806948;
+      float: center;
+      padding: 5px;
+      margin: 30px 30px 0px 30px;
+      border-style: dashed double;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
 </head>
 
-<body onload="createSheet();"
-  style="background-image: url('https://i.imgur.com/0Gr4Nc4.png'); background-repeat: repeat-y;">
+<body onload="createSheet();">
 
-  <div style="width: 99%; margin: auto; height: auto; border: 5px solid #b4a185;">
+  <div class="mainDiv">
     <!-- <p style="text-align: center; color: #2c2c2c; font-family: 'book antiqua';"> </p>
     <p style="text-align: center; color: #c7b193; font-family: 'book antiqua';"> </p> -->
-    <div style="text-align: center;"><img src="https://i.imgur.com/fUgNk65.png"></div>
-    <div style=" text-align: center; border: 5px solid #806948; float: center; width: auto; height: auto; margin: 30px; margin-bottom: 10px; 
-        margin-top: 5px; padding: 5px; color: #f4e9ca; font-size: 30px;">
-      <h1 id="Name"> Alain </h1>
+    <div class="picture">
+      <canvas id="photo" width="656" height="937"></canvas>
     </div>
-    <div style="font-size: 16px; text-align: center; opacity: 1;  border: 4px solid #806948; float: center; width: auto; height: auto; padding: 5px;
-    margin: 30px 30px 35px 30px; border-style: dashed double ;  ">
-      <h2>Funfacts:</h2>
-      <p id="Fact1">Cras odio ante, semper eget sapien vitae, commodo feugiat nulla.</p>
-      <p id="Fact2">Cras odio ante, semper eget sapien vitae, commodo feugiat nulla.</p>
-      <h2>Stats:</h2>
-      <p id="stat1">Agilité : 12</p>
-      <p id="stat2">Force : 45</p>  
+    <div class="informations">
+      <div style=" text-align: center;" class="name">
+        <h1 id="Name"> Alain </h1>
+      </div>
+      <div class="details">
+        <div style="flex:1;
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+          <div>
+            <h2>Funfacts:</h2>
+            <p id="Fact1">Cras odio ante, semper eget sapien vitae, commodo feugiat nulla.</p>
+            <p id="Fact2">Cras odio ante, semper eget sapien vitae, commodo feugiat nulla.</p>
+          </div>
+        </div>
+        <div>
+          <img style="margin: 5px;" src="https://i.imgur.com/XOd7lFG.png" width="442" height="71" />
+        </div>
+        <div style="flex:1;
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+          <div style="flex:1">
+            <h2>Stats:</h2>
+            <div style="display: flex; flex-direction: row;">
+              <div style="flex:1;">
+                <p id="stat1">Agilité : 12</p>
+                <p id="stat2">Force : 45</p>
+                <p id="stat3">Endurance : 45</p>
+              </div>
+              <div style="flex:1;">
+                <p id="stat4">Charisme : 12</p>
+                <p id="stat5">Chance : 45</p>
+                <p id="stat6">Intelligence : 45</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div style="font-size: 16px; text-align: center; opacity: 1;  border: 4px solid #806948; float: center; width: auto; height: auto; padding: 5px;
-             margin: 30px 30px 35px 30px; border-style: dashed double ;  ">
-      <img style="margin: 10px;" src="https://i.imgur.com/XOd7lFG.png" width="442" height="71" />
-        <div><canvas id="photo" width="656" height="937"></canvas></div>
-      <img style="margin: 10px;" src="https://i.imgur.com/XOd7lFG.png" width="442" height="71" />
-    </div>
+
 
   </div>
 

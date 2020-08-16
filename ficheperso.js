@@ -1,4 +1,6 @@
-//Coucou Diane ! ♥
+const DEFAULT_PIC_DIMENSION = [656, 937]
+
+
 var characterName = "Lorem" ;
 
 var funFacts = [] ;
@@ -221,6 +223,10 @@ function createSheet() {
 
 	updateElement("stat1","Force: "+ strengh); 
 	updateElement("stat2","Agilité: "+ agility); 
+	updateElement("stat3","Endurance: "+ stamina); 
+	updateElement("stat4","Charisme: "+ charisma); 
+	updateElement("stat5","Chance: "+ luck); 
+	updateElement("stat6","Intelligence: "+ intelligence);
 
 	var pathImages  ;
 	if(gender == "Male")
@@ -233,6 +239,8 @@ function createSheet() {
 	}
 	
 	var canvas = document.getElementById('photo');
+	canvas.height = innerHeight - 110;
+	canvas.width = canvas.width * (canvas.height / DEFAULT_PIC_DIMENSION[1]);
 	var ctx = canvas.getContext('2d');
 
 	var areReady = [];
@@ -252,7 +260,7 @@ function createSheet() {
 			}
 			if(allReady){
 				for(let img of images){
-					ctx.drawImage(img, 0, 0);
+					ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 				}
 			}
 		});

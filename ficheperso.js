@@ -19,9 +19,13 @@ var intelligence = -1 ;
 
 var gender = "enby";
 
-const MALE_NAME = ["Pierre", "Marceau", "Yvan", "Léopold", "Carmin"];
+const MALE_NAME = ["Pierre", "Marceau", "Yvan", "Léopold", "Carmin", "Ilbertus", "Filibert", "Joscelin", "Jasper", "Stéphane", "Ansèlme", "Eloi", "Flavien", "Gaultier", "Foulques",
+"Edouard", "Gregoire", "Fernand", "Gerald", "Guillaume", "Louis", "Justinien", "Isaac", "Maurin", "Renaud", "Tancrède", "Sigismond", "Romaric", "Thibaud", "Tristan",
+"Ulrich", "Wilfried", "Oswald", "Philibert", "Paulin", "Paul", "Luc", "Roland", "Ulric", "Vincent", "William", "Thibert", "Stanislas", "Richard", "Sebastien", "Remi"];
 
-const FEMALE_NAME = ["Alice", "Marie", "Yélinda", "Thérèse", "Lucie"];
+const FEMALE_NAME = ["Alice", "Marie", "Yélinda", "Thérèse", "Lucie", "Odile", "Adelaïde", "Béatrice", "Bénédicte", "Catherine", "Constance", "Elizabeth", "Eloïse", "Emeline", "Guenièvre",
+"Hermine", "Isabelle", "Iseult", "Jeanne", "Joséphine", "Louise", "Blanche", "Brunhilde", "Clotilde", "Colombe", "Gisele", "Mathilde", "Mélusine", "Margot", "Victoire",
+"Lesceline", "Pétronille", "Renaude", "Adeline", "Cornélia", "Cunégonde", "Eulalie", "Frédégonde", "Hilde", "Irénée", "Laeticia", "Mélissandre", "Mélanie", "Viviane", "Sophie"];
 
 const GENDERS = ["Male", "Female"];
 

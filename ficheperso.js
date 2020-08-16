@@ -113,7 +113,7 @@ function getRandomCharacterFromLayer(layers){
 
 		switch (index) {
 			case 0:
-				newPath += randomRow[1] + hairColor + "Back" + getRandomIntInRange(1, randomRow[0]) + ".png";
+				newPath += randomRow[1] + hairColor + "back" + getRandomIntInRange(1, randomRow[0]) + ".png";
 				paths.push(newPath);
 				break;
 			case 4:
